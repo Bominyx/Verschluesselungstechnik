@@ -1,3 +1,5 @@
+from math import gcd
+
 from Ring import Ring
 from RingElement import RingElement
 
@@ -44,3 +46,11 @@ class ZnElement(RingElement):
 
     def __repr__(self):
         return str(self.value)  # damit print() den Wert lesbar ausgibt
+
+    def fast_is_unit(self):
+        return gcd(self.value, self.n) == 1
+
+    def fast_inverse(self):
+        if not self.fast_is_unit():
+            raise ValueError("Das Element ist keine Einheit.")
+        return ZnElement(pow(self.value, -1, self.n), self.n)
