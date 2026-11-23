@@ -1,26 +1,26 @@
-from Zn import ZnElement
+from Zn import Zn, ZnElement
 from AbelianGroup import AbelianGroup, AbelianGroupElement
 
 
 class CrazyAbelianGroup(AbelianGroup):
-    def __init__(self, R):  # R ist ein Ring
+    def __init__(self, R: Zn):  # R ist ein Ring
         self.R = R
 
-    def identity(self):
+    def identity(self) -> CrazyGroupElement:
         return CrazyGroupElement(self.R.zero(), self.R.n)
 
-    def enum(self):
+    def enum(self) -> list[CrazyGroupElement]:
         elements = [CrazyGroupElement(r, self.R.n) for r in self.R.enum()]
         elements.append(CrazyGroupElement(0, self.R.n, True))
         return elements
 
 
 class CrazyGroupElement(AbelianGroupElement):
-    def __init__(self, x, p, is_infinite=False):
+    def __init__(self, x, p: int, is_infinite=False):
         self.x = x if isinstance(x, ZnElement) else ZnElement(x, p)
         self.is_infinite = is_infinite
 
-    def multiply(self, other):  # Gruppenoperation
+    def multiply(self, other: CrazyGroupElement) -> CrazyGroupElement:  # Gruppenoperation
         if self.is_infinite and other.is_infinite:
             return CrazyGroupElement(self.x.zero(), self.x.n)
 
@@ -40,10 +40,10 @@ class CrazyGroupElement(AbelianGroupElement):
 
         return CrazyGroupElement(self.x.one().subtract(xy).inverse().multiply(self.x.add(other.x)), self.x.n)
 
-    def inverse(self):
+    def inverse(self) -> CrazyGroupElement:
         return CrazyGroupElement(self.x.additive_inverse(), self.x.n, self.is_infinite)
 
-    def identity(self):
+    def identity(self) -> CrazyGroupElement:
         return CrazyGroupElement(self.x.zero(), self.x.n)
 
     def __eq__(self, other):
