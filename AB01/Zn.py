@@ -1,7 +1,6 @@
 from math import gcd
 
-from Ring import Ring
-from RingElement import RingElement
+from Ring import Ring, RingElement
 
 
 class Zn(Ring):

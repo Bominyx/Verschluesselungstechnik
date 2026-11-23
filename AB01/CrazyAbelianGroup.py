@@ -1,6 +1,5 @@
 from Zn import ZnElement
-from AbelianGroup import AbelianGroup
-from AbelianGroupElement import AbelianGroupElement
+from AbelianGroup import AbelianGroup, AbelianGroupElement
 
 
 class CrazyAbelianGroup(AbelianGroup):

@@ -1,5 +1,4 @@
-from Ring import Ring
-from RingElement import RingElement
+from Ring import Ring, RingElement
 from Zn import ZnElement
 
 
